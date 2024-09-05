@@ -15,15 +15,20 @@ const Section = ({ title, children, color = "bg-indigo-100" }) => (
     </div>
 );
 
-const ExperienceItem = ({ title, organization, date, description }) => (
+const ExperienceItem = ({ title, organization, date, description, link }) => (
     <Card className="mb-6 border-t-4 border-indigo-500">
-        <h3 className="text-xl font-semibold text-indigo-600 font-display">{title}</h3>
+        {/*<h3 className="text-xl font-semibold text-indigo-600 font-display">{title}</h3>*/}
+        <h3 className="text-xl font-semibold text-indigo-600 font-display">
+            <a href={link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                {title}
+            </a>
+        </h3>
         <p className="text-lg text-gray-700 font-body">{organization}</p>
         <p className="text-sm text-gray-500 font-body mb-2">{date}</p>
         <ul className="list-none text-gray-600 font-body">
             {description.map((item, index) => (
                 <li key={index} className="mb-1 flex items-start">
-                    <ChevronRight size={16} className="mr-2 mt-1 flex-shrink-0 text-indigo-500" />
+                    <ChevronRight size={16} className="mr-2 mt-1 flex-shrink-0 text-indigo-500"/>
                     <span>{item}</span>
                 </li>
             ))}
@@ -31,13 +36,19 @@ const ExperienceItem = ({ title, organization, date, description }) => (
     </Card>
 );
 
-const ProjectItem = ({ title, description }) => (
+const ProjectItem = ({title, date, description, link}) => (
     <Card className="mb-6 border-t-4 border-green-500">
-        <h3 className="text-xl font-semibold text-green-600 font-display">{title}</h3>
+        {/*<h3 className="text-xl font-semibold text-green-600 font-display">{title}</h3>*/}
+        <h3 className="text-xl font-semibold text-indigo-600 font-display">
+            <a href={link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                {title}
+            </a>
+        </h3>
+        <p className="text-sm text-gray-500 font-body mb-2">{date}</p>
         <ul className="list-none mt-2 text-gray-600 font-body">
             {description.map((item, index) => (
                 <li key={index} className="mb-1 flex items-start">
-                    <ChevronRight size={16} className="mr-2 mt-1 flex-shrink-0 text-green-500" />
+                    <ChevronRight size={16} className="mr-2 mt-1 flex-shrink-0 text-green-500"/>
                     <span>{item}</span>
                 </li>
             ))}
@@ -46,8 +57,8 @@ const ProjectItem = ({ title, description }) => (
 );
 
 const Navigation = () => (
-    <nav className="bg-gradient-to-r from-purple-600 to-indigo-600 p-4 text-white sticky top-0 z-10 shadow-md">
-        <ul className="flex justify-center space-x-6 font-display">
+    <nav className="bg-gradient-to-r from-purple-600 to-indigo-600 p-6 text-white sticky top-0 z-10 shadow-md">
+        <ul className="flex justify-center space-x-10 font-display text-xl">
             <li><Link to="/" className="hover:text-yellow-200 transition-colors duration-300">Home</Link></li>
             <li><Link to="/experiences" className="hover:text-yellow-200 transition-colors duration-300">Experiences</Link></li>
             <li><Link to="/projects" className="hover:text-yellow-200 transition-colors duration-300">Projects</Link></li>
@@ -60,6 +71,14 @@ const HomePage = () => (
         <Card className="text-center mb-12 bg-gradient-to-r from-blue-100 to-purple-100">
             <h1 className="text-5xl font-bold mb-4 text-indigo-700 font-display">Chunhao Bi</h1>
             <p className="text-2xl mb-4 text-gray-600 font-body">Boston, MA, USA</p>
+
+            {/* Portrait Image */}
+            <img
+                src="portrait_hainan_square.jpg"
+                alt="Chunhao Bi's Portrait"
+                className="w-60 h-60 rounded-full mx-auto mb-6"
+            />
+
             <div className="flex justify-center space-x-4 flex-wrap">
                 <a href="tel:8573616929" className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors duration-300 m-2">
                     <Phone size={20} className="mr-2" /> (857)-361-6929
@@ -76,18 +95,21 @@ const HomePage = () => (
             </div>
         </Card>
 
+
         <Section title="Education" color="bg-blue-100">
             <ExperienceItem
-                title="Master of Science in Computer Science"
-                organization="Boston University"
+                title="Boston University"
+                organization="Master of Science in Computer Science"
                 date="Sep 2023 - Dec 2024"
                 description={["GPA: 3.77", "Boston, MA, U.S."]}
+                link="https://www.bu.edu/"
             />
             <ExperienceItem
-                title="Bachelor of Science in Computer Science"
-                organization="ShanghaiTech University"
+                title="ShanghaiTech University"
+                organization="Bachelor of Engineering in Computer Science and Technology"
                 date="Sep 2019 - Jun 2023"
                 description={["GPA: 3.51", "Shanghai, China"]}
+                link="https://www.shanghaitech.edu.cn/eng/"
             />
         </Section>
 
@@ -116,8 +138,8 @@ const ExperiencesPage = () => (
 
         <Section title="Work Experience" color="bg-yellow-100">
             <ExperienceItem
-                title="Part-Time Software Engineer"
-                organization="Shanghai RhythMo Digital Technology Co."
+                title="RhyLive & RhyVerse (Motion Capture Software)"
+                organization="Part-Time Software Developer | Shanghai RhythMo Digital Technology Co."
                 date="May 2021 - Aug 2022"
                 description={[
                     "Collaborated on projects that commercialize research achievements, with the goal of reducing barriers to the public's adoption of human motion capture technology for social and gaming applications.",
@@ -125,19 +147,21 @@ const ExperiencesPage = () => (
                     "Conceptualized solutions for human-computer interaction using a single camera, with particular focus on VR software and game development.",
                     "Developed motion capture-related software RhyLive and RhyVerse. Released on App Store with 4.3-stars rating and on Steam platform."
                 ]}
+                link="https://rhythmo.cn/"
             />
         </Section>
 
         <Section title="Research Experience" color="bg-pink-100">
             <ExperienceItem
-                title="Undergraduate Thesis Research"
-                organization="Mobile Perception Lab"
+                title="LiDAR-based Floor Plan-assisted LiDAR Localization Extension"
+                organization="ShanghaiTech Mobile Perception Lab"
                 date="Sep 2022 - May 2023"
                 description={[
                     "Developed a robust LiDAR-based localization method for indoor localization tasks for robots and humans in cluttered environments, utilizing prior floor plan information.",
                     "Revised the Flood Fill algorithm for efficient plane segmentation on LiDAR point clouds.",
                     "Significantly enhanced the performance and stability of the original FP-Loc framework across multiple datasets featuring complex indoor structures and clutter."
                 ]}
+                link="https://fplocextension.github.io/index.html"
             />
         </Section>
     </div>
@@ -149,33 +173,51 @@ const ProjectsPage = () => (
 
         <Section title="Featured Projects" color="bg-green-100">
             <ProjectItem
-                title="LoCATor | Android App Development Project"
+                title="LoCATor | Android App Development"
+                date="Feb 2024- May 2024"
                 description={[
                     "Developed an Android mobile application utilizing Google Map SDK for real-time location sharing of campus cats, facilitating community engagement.",
                     "Leveraged Firebase to implement real-time database functionalities, enabling users to track cat locations and take photos, fostering a collaborative environment."
                 ]}
+                link="https://github.com/ChunhBi/LoCATor"
             />
             <ProjectItem
-                title="Photorealistic Video Generation | Deep Learning Project"
+                title="Photorealistic Video Generation | Generative LLM"
+                date="Oct 2023- Dec 2023"
                 description={[
                     "Research on Video Generation and Translation based on Stable Diffusion and LLM.",
                     "Experimented and Slightly improved SOTA SD-based framework."
                 ]}
+                link="https://github.com/ChunhBi/Rerender_A_Video"
             />
             <ProjectItem
-                title="Doodle Jump AI | Artificial Intelligence Project"
+                title="Doodle Jump AI | Reinforcement Learning"
+                date="Apr 2022- Jun 2022"
                 description={[
                     "Implemented a PC version of the popular mobile game 'Doodle Jump' using Python.",
                     "Applied Reinforcement Learning methods to create an AI for the game 'Doodle Jump' that play autonomously and outperformed human players."
                 ]}
+                link="https://github.com/ChunhBi/Doodle-Jump-AI"
             />
             <ProjectItem
-                title="Photon Mapping | Computer Graphics Project"
+                title="Photon Mapping | Computer Graphics"
+                date="Nov 2021- Jan 2022"
                 description={[
                     "Implemented Photon Mapping, a specialized ray-tracing rendering algorithm, to efficiently produce photorealistic images of complex virtual scenes at a faster rate than traditional path-tracing techniques.",
                     "Produced high-fidelity, photorealistic images of transparent materials like glass and water."
                 ]}
+                link="https://github.com/ChunhBi/CS172_Photon_Mapping"
             />
+            <ProjectItem
+                title="Video Human Pose Estimation based on DEKR | Computer Vision"
+                date="Oct 2021 - Dec 2021"
+                description={[
+                    "Utilized a state-of-the-art CNN-based human pose estimation algorithm called DEKR to track human positions and estimate human poses in videos.",
+                    "Incorporated RNN structures, such as Gated Recurrent Units (GRU), to capture and encode temporal relationships between images, moving beyond the independent analysis of frames in the original approach."
+                ]}
+                link="https://github.com/ChunhBi/CS171_VHPE_DEKR"
+            />
+
         </Section>
     </div>
 );
